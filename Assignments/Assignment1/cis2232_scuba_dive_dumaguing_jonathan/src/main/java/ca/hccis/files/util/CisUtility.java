@@ -9,8 +9,8 @@ import java.util.Scanner;
 /**
  * Has some useful methods to be used in our programs.
  *
- * @author bjmaclean
- * @since Oct 19, 2021
+ * @author Jonathan Dumaguing
+ * @since 20260923
  */
 public class CisUtility {
 

@@ -85,7 +85,7 @@ public class Controller {
         readAll();
 
         System.out.println("--Add Dive Plan--");
-        String diverName = CisUtility.getInputString("Diver Name").trim();
+        String diverName = getValidDiverName();
 
         //Check if this diver already has a plan.  The name check ignores upper/lower case.
         Dive existingDive = findByDiverName(diverName);
@@ -120,6 +120,9 @@ public class Controller {
      * Processing for menu option E.  The user picks the dive plan using the diveId
      * which they can see from the View option.
      *
+     * The same getInformation() method used by add is called here so the prompts
+     * and the validation only need to be written in one place.
+     *
      * @author Jonathan Dumaguing
      * @since 20260923
      */
@@ -128,7 +131,7 @@ public class Controller {
         readAll();
 
         System.out.println("--Edit Dive Plan--");
-        int diveId = CisUtility.getInputInt("Dive ID");
+        int diveId = getValidDiveId();
 
         Dive editingDive = diveMap.get(diveId);
 
@@ -138,9 +141,24 @@ public class Controller {
             return;
         }
 
+        System.out.println("Current values:");
         System.out.println(editingDive.toString());
+        System.out.println("Please enter the new values.");
 
-        editingDive.edit();
+        //The diver name is asked here so we can make sure it is not being changed
+        //to a name which already belongs to a different dive plan.
+        String diverName = getValidDiverName();
+        Dive nameOwner = findByDiverName(diverName);
+
+        if (nameOwner != null && nameOwner.getDiveId() != editingDive.getDiveId()) {
+            System.out.println(MESSAGE_ERROR + " - another dive plan already uses this diver name.");
+            System.out.println("Edit cancelled.");
+            return;
+        }
+
+        editingDive.setDiverName(diverName);
+        editingDive.getInformation();
+
         diveMap.put(editingDive.getDiveId(), editingDive);
 
         writeAll();
@@ -166,6 +184,41 @@ public class Controller {
         System.out.println("--All Dive Plans (" + diveMap.size() + ")--");
         for (Dive current : diveMap.values()) {
             System.out.println(current.toString());
+        }
+    }
+
+    /**
+     * Keep asking until the user enters a diver name which is not blank.
+     *
+     * @return A valid diver name
+     * @author Jonathan Dumaguing
+     * @since 20260923
+     */
+    public static String getValidDiverName() {
+        String diverName = CisUtility.getInputString("Diver Name").trim();
+        while (diverName.isEmpty()) {
+            System.out.println("Diver name cannot be blank.");
+            diverName = CisUtility.getInputString("Diver Name").trim();
+        }
+        return diverName;
+    }
+
+    /**
+     * Keep asking until the user enters a whole number for the dive id.  Letters
+     * are rejected instead of crashing the program.
+     *
+     * @return A valid dive id entered by the user
+     * @author Jonathan Dumaguing
+     * @since 20260923
+     */
+    public static int getValidDiveId() {
+        while (true) {
+            String entered = CisUtility.getInputString("Dive ID").trim();
+            try {
+                return Integer.parseInt(entered);
+            } catch (NumberFormatException e) {
+                System.out.println("'" + entered + "' is not a valid dive id.  Please try again.");
+            }
         }
     }
 
