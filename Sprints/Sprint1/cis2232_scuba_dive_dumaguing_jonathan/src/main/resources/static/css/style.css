@@ -1,0 +1,45 @@
+/*
+ * Scuba Dive Air Consumption & Tank Planner
+ * Sprint 1 - theme colors from the BA
+ *
+ * Main Color:      Ocean Navy Blue  #003366
+ * Secondary Color: Light Aqua Blue  #66B2CC
+ *
+ * @author Jonathan Dumaguing
+ * @since 20260927
+ */
+
+:root {
+    --main-color: #003366;
+    --secondary-color: #66B2CC;
+}
+
+body {
+    background-color: var(--main-color);
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    height: 100vh;
+
+    /* Centre the project title on the page */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 0;
+    padding: 0 20px;
+}
+
+/* The underline uses the secondary colour so both theme colours are shown */
+.title-underline {
+    width: 220px;
+    height: 6px;
+    background-color: var(--secondary-color);
+    margin-top: 25px;
+    border-radius: 3px;
+}
