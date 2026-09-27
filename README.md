@@ -1,6 +1,6 @@
 # Scuba Dive Air Consumption & Tank Planner #
  
-cis2232 project
+CIS-2232 project
  
 ## Development Team ##
 
