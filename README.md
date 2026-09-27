@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 # Scuba Dive Air Consumption & Tank Planner #
  
 CIS-2232 project
@@ -116,5 +115,3 @@ To be determined in future sprint
 # 
 
 # To be determined in future sprint
-
->>>>>>> Stashed changes
