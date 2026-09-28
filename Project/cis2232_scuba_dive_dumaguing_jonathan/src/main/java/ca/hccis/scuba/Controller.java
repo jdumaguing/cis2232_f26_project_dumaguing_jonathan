@@ -1,6 +1,6 @@
 package ca.hccis.scuba;
 
-import ca.hccis.files.entity.Dive;
+import ca.hccis.scuba.entity.Dive;
 import ca.hccis.util.CisUtility;
 import com.google.gson.Gson;
 
