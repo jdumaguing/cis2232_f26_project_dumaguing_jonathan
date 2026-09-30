@@ -4,9 +4,9 @@ CIS-2232 project
  
 ## Development Team ##
 
-Business Client: Sean <br/>
+Business Client: Sean Huang <br/>
 Lead Developer: Jonathan Dumaguing <br/>
-Quality Control: Jake <br/>
+Quality Control: Jake Henderson <br/>
  
 ## Description ##
 
