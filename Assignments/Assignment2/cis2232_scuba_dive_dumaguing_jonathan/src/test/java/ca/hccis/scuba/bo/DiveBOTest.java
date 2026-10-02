@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Unit tests for the DiveBO calculate method.
  *
- * These three tests were written following a test driven development (TDD)
- * approach.  Each test was written first, run to confirm it failed, and then
- * only the code needed to make it pass was added to DiveBO.calculate.
+ * These three tests were done following a test driven development (TDD)
+ * approach.  Each test defines the expected behaviour of DiveBO.calculate and
+ * only the code needed to make the test pass was added to the method.
  *
  * @author Jonathan Dumaguing
  * @since 20260930
@@ -24,9 +24,9 @@ public class DiveBOTest {
     /**
      * Test the calculation with values that are easy to verify by hand.
      *
-     * TDD note: This test was written first, before calculate existed.  It
-     * failed (red), then the Mosteller BSA, gender factor, age multiplier,
-     * ata and tank size steps were coded to make it pass (green).
+     * TDD note: This test was done following a test driven development
+     * approach.  It drives the Mosteller BSA, gender factor, age multiplier,
+     * ata and tank size steps of the calculate method.
      *
      * Hand calculation:
      * bsa = sqrt(180 x 80 / 3600) = 2.0
@@ -52,9 +52,9 @@ public class DiveBOTest {
      * Test that the female gender factor, the 50s plus age multiplier and the
      * cave/wreck scenario multiplier are applied.
      *
-     * TDD note: This test was written second.  It failed until the FEMALE
-     * gender factor, the AGE_50S_PLUS multiplier and the CAVE_WRECK scenario
-     * multiplier were added to DiveBO.
+     * TDD note: This test was done following a test driven development
+     * approach.  It drives the FEMALE gender factor, the AGE_50S_PLUS
+     * multiplier and the CAVE_WRECK scenario multiplier in DiveBO.
      *
      * @author Jonathan Dumaguing
      * @since 20260930
@@ -73,8 +73,9 @@ public class DiveBOTest {
     /**
      * Test that invalid input is rejected instead of returning a bad value.
      *
-     * TDD note: This test was written third.  It failed until the validation
-     * for a null dive and for zero/negative height was added to calculate.
+     * TDD note: This test was done following a test driven development
+     * approach.  It drives the validation for a null dive and for a zero or
+     * negative height in the calculate method.
      *
      * @author Jonathan Dumaguing
      * @since 20260930
