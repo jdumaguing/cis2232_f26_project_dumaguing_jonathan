@@ -36,4 +36,4 @@ The calculation / processing needed when the user enters a new dive plan will be
  
 ## Report Details ##
 
-To be determined in future sprint
+Enter a Dive Scenario name and the report will return any rows that a diver choose that dive scenario.
