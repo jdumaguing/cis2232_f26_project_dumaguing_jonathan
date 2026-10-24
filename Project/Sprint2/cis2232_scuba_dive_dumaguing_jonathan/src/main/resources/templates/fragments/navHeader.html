@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar" class="navbar nav" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a th:href="@{/}" class="vert-align accent navbar-item" th:text="#{application.name}">
+            Scuba Dive Air Consumption &amp; Tank Planner
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" id="burg"
+           onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"
+           data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a th:href="@{/report}" class="accent navbar-link">Reports</a>
+                <div class="accent-background navbar-dropdown">
+                    <a th:href="@{/report/dive/scenario}" class="accent navbar-item"
+                       th:text="#{label.report.dive.scenario.report}">Dive scenario report-placeholder</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
