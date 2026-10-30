@@ -1,4 +1,4 @@
-# Scuba Dive Air Consumption & Tank Planner #
+<img width="4032" height="1201" alt="image" src="https://github.com/user-attachments/assets/c631a353-e907-450d-a18c-d608e5c05a01" /># Scuba Dive Air Consumption & Tank Planner #
  
 CIS-2232 project
  
@@ -36,4 +36,5 @@ The calculation / processing needed when the user enters a new dive plan will be
  
 ## Report Details ##
 
-Enter a Dive Scenario name and the report will return any rows that a diver choose that dive scenario.
+Dive Scenario Report Input: Dive scenario selected from a dropdown (DRIFT, CAVE_WRECK, COUNTER_CURRENT) Output: All dive plans for the selected scenario, sorted by diver name, showing the diver name, height, weight, gender, age group, target depth, planned time and recommended tank size. A bar chart shows the recommended tank size for each diver. If no dive plans are found, the message "No dive plans found for that scenario" is shown. The report is also written to a file: c:\CIS2232\DivePlansForScenario.txt The data for the report is obtained using jdbc.
+
