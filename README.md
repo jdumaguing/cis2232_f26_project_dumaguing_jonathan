@@ -1,5 +1,3 @@
-<img width="4032" height="1201" alt="image" src="https://github.com/user-attachments/assets/c631a353-e907-450d-a18c-d608e5c05a01" /># Scuba Dive Air Consumption & Tank Planner #
- 
 CIS-2232 project
  
 ## Development Team ##
