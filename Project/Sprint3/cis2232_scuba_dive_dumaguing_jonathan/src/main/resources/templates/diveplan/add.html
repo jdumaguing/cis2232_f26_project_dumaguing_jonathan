@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+    <title id="pageTitle">Dive Plan</title>
+</head>
+<body>
+<style scoped="scoped">.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px
+}
+.form-row label {
+    text-align: left
+}
+.form-row input, .form-row select {
+    width: 230px;
+    margin-left: 16px
+}
+.cd {
+    text-align: left;
+    margin: 2px 0 0 0
+}
+/* Submit and Cancel side by side on the same line.  styles.css adds a top margin
+   to every button in .container, so it is removed here to keep them level. */
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px
+}
+.form-buttons .button {
+    margin: 0 !important
+}</style>
+<nav th:replace="fragments/navHeader :: navbar"></nav>
+<div class="container has-text-centered">
+
+    <!-- The same page is used for add and edit.  A new dive plan does not have a dive id yet. -->
+    <h2 class="title is-2" th:if="${divePlan.diveId == null}" th:text="#{label.diveplan.add.title}">Add Dive Plan</h2>
+    <h2 class="title is-2" th:unless="${divePlan.diveId == null}" th:text="#{label.diveplan.edit.title}">Edit Dive Plan</h2>
+
+    <p class="error wbb" style="display:inline-block" th:if="${not #strings.isEmpty(messageError)}"
+       th:text="${messageError}">Message from controller</p>
+
+    <form th:action="@{/diveplan/submit}" th:object="${divePlan}" method="post" class="wbb"
+          style="display:inline-block; text-align:left; padding: 12px !important" novalidate="novalidate">
+
+        <input type="hidden" th:field="*{diveId}"/>
+
+        <!-- Created date/time -->
+        <div class="form-row">
+            <label for="createdDateTime">Created Date/Time:</label>
+            <input type="text" th:field="*{createdDateTime}" readonly="readonly"/>
+        </div>
+
+        <!-- Diver name -->
+        <div class="form-row">
+            <label for="diverName">Diver Name:</label>
+            <input type="text" th:field="*{diverName}"/>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('diverName')}" th:errors="*{diverName}"></p>
+
+        <!-- Height -->
+        <div class="form-row">
+            <label for="heightCm">Height (cm):</label>
+            <input type="number" step="any" th:field="*{heightCm}"/>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('heightCm')}" th:errors="*{heightCm}"></p>
+
+        <!-- Weight -->
+        <div class="form-row">
+            <label for="weightKg">Weight (kg):</label>
+            <input type="number" step="any" th:field="*{weightKg}"/>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('weightKg')}" th:errors="*{weightKg}"></p>
+
+        <!-- Gender -->
+        <div class="form-row">
+            <label for="gender">Gender:</label>
+            <select th:field="*{gender}">
+                <option value="">-- Select --</option>
+                <option th:each="g : ${genders}" th:value="${g}" th:text="${g}"></option>
+            </select>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+
+        <!-- Age group -->
+        <div class="form-row">
+            <label for="ageGroup">Age Group:</label>
+            <select th:field="*{ageGroup}">
+                <option value="">-- Select --</option>
+                <option th:each="a : ${ageGroups}" th:value="${a}" th:text="${a}"></option>
+            </select>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('ageGroup')}" th:errors="*{ageGroup}"></p>
+
+        <!-- Target depth -->
+        <div class="form-row">
+            <label for="targetDepthMeters">Target Depth (meters):</label>
+            <input type="number" step="any" th:field="*{targetDepthMeters}"/>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('targetDepthMeters')}" th:errors="*{targetDepthMeters}"></p>
+
+        <!-- Planned time -->
+        <div class="form-row">
+            <label for="plannedTimeMinutes">Planned Bottom Time (minutes):</label>
+            <input type="number" step="any" th:field="*{plannedTimeMinutes}"/>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('plannedTimeMinutes')}" th:errors="*{plannedTimeMinutes}"></p>
+
+        <!-- Dive scenario -->
+        <div class="form-row">
+            <label for="diveScenario">Dive Scenario:</label>
+            <select th:field="*{diveScenario}">
+                <option value="">-- Select --</option>
+                <option th:each="s : ${scenarios}" th:value="${s}" th:text="${s}"></option>
+            </select>
+        </div>
+        <p class="cd" th:if="${#fields.hasErrors('diveScenario')}" th:errors="*{diveScenario}"></p>
+
+        <!-- Submit and cancel buttons -->
+        <div class="form-buttons">
+            <button type="submit" class="button" th:text="#{label.submit}">Submit</button>
+            <a th:href="@{/diveplan}" class="button" th:text="#{label.cancel}">Cancel</a>
+        </div>
+    </form>
+</div>
+<br/>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

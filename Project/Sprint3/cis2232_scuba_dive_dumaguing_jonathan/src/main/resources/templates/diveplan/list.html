@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+    <title id="pageTitle">Dive Plans</title>
+</head>
+<body>
+<style scoped="scoped">/* Compact table so every column, including Edit and Delete, fits on the page. */
+table.wbb.dp-table {
+    display: table !important;
+    white-space: normal !important;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    text-align: left
+}
+table.wbb.dp-table th,
+table.wbb.dp-table td {
+    padding: 4px 8px !important;
+    white-space: nowrap;
+    vertical-align: middle
+}
+table.wbb.dp-table th {
+    white-space: normal;
+    vertical-align: bottom
+}
+.dp-actions a {
+    margin-right: 8px
+}
+.dp-actions a.dp-delete {
+    color: #b00020
+}
+/* Only scrolls on small screens.  The actions are the first column so they stay visible. */
+.dp-scroll {
+    overflow-x: auto;
+    max-width: 100%
+}</style>
+<nav th:replace="fragments/navHeader :: navbar"></nav>
+<div class="container has-text-centered">
+    <h2 class="title is-2" th:text="#{label.diveplan.list}">Dive Plans</h2>
+
+    <!-- Messages sent by the controller (add, edit and delete results) -->
+    <p class="error wbb" style="display:inline-block" th:if="${not #strings.isEmpty(messageError)}"
+       th:text="${messageError}">Message from controller</p>
+    <p class="success wbb" style="display:inline-block" th:if="${not #strings.isEmpty(messageSuccess)}"
+       th:text="${messageSuccess}">Message success from controller</p>
+
+    <div style="margin: 16px 0;">
+        <a th:href="@{/diveplan/add}" class="button" th:text="#{label.diveplan.add.new}">Add New Dive Plan</a>
+    </div>
+
+    <div class="dp-scroll">
+        <table class="wbb dp-table">
+            <thead>
+            <tr>
+                <th>Actions</th>
+                <th>Dive ID</th>
+                <th>Created</th>
+                <th>Diver</th>
+                <th>Height (cm)</th>
+                <th>Weight (kg)</th>
+                <th>Gender</th>
+                <th>Age Group</th>
+                <th>Depth (m)</th>
+                <th>Time (min)</th>
+                <th>Scenario</th>
+                <th>Tank Size (L)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${divePlans}">
+                <td class="dp-actions">
+                    <a th:href="@{/diveplan/edit/{id}(id=${item.diveId})}" th:text="#{label.edit}">Edit</a>
+                    <a class="dp-delete" th:href="@{/diveplan/delete/{id}(id=${item.diveId})}"
+                       onclick="return confirm('Delete this dive plan?');" th:text="#{label.delete}">Delete</a>
+                </td>
+                <td th:text="${item.diveId}">id here</td>
+                <td th:text="${item.createdDateTime}">created here</td>
+                <td th:text="${item.diverName}">diver here</td>
+                <td th:text="${item.heightCm}">height here</td>
+                <td th:text="${item.weightKg}">weight here</td>
+                <td th:text="${item.gender}">gender here</td>
+                <td th:text="${item.ageGroup}">age group here</td>
+                <td th:text="${item.targetDepthMeters}">depth here</td>
+                <td th:text="${item.plannedTimeMinutes}">time here</td>
+                <td th:text="${item.diveScenario}">scenario here</td>
+                <td th:text="${#numbers.formatDecimal(item.recommendedTankSizeLiters, 1, 2)}">tank here</td>
+            </tr>
+
+            <!-- Message when there is no data -->
+            <tr th:if="${#lists.isEmpty(divePlans)}">
+                <td colspan="12" th:text="#{label.diveplan.none}">No dive plans found</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br/>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

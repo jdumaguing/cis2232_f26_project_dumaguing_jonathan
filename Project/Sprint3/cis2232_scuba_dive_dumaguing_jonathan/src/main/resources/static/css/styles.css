@@ -1,0 +1,294 @@
+html{
+    overflow: auto !important;
+    min-width:246px;
+}
+
+:root {
+    /*Variables for team colors.  Main: Ocean Navy Blue #003366  Secondary: Light Aqua Blue #66B2CC*/
+    --main-color-light: #66B2CC;
+    --main-color-primary: #003366;
+    --main-color-dark: #003366;
+    --main-color-text: #ffffff;
+    --main-color-bright: #66B2CC;
+}
+
+.cd{
+    color:#F00!important;
+}
+
+label{
+    margin-right:8px
+}
+
+/*Make body height 100% so that footer stays at the bottom and position relative to the footer*/
+body {
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+    background: var(--main-color-light);
+}
+
+th,tr,td{
+    text-align:left;
+}
+
+td{
+    padding:0!important
+}
+
+tr th{
+    line-height:1;
+    padding-bottom:8px
+}
+
+tr:nth-child(even){
+    background-color: #FFF
+}
+
+.a{
+    padding:0 32px 0 0
+}
+
+table{
+    padding:0!important;
+    display:inline-block!important
+}
+
+.logo{
+    height: 40px
+}
+
+.no-link {
+    color: inherit
+}
+
+.no-link:hover {
+    text-decoration: none;
+    color: inherit
+}
+
+.table-title {
+    display: flex;
+    justify-content: space-between
+}
+
+.table-container {
+    margin: 0 auto
+}
+
+.field-id {
+    width: 20px;
+    display: none
+}
+
+.flex-sp-btw {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between
+}
+
+.links > a {
+    margin-right: 24px
+}
+
+.nav {
+    margin-bottom: 50px;
+    background: var(--main-color-dark)
+}
+
+.ftr {
+    margin-top: 50px;
+    padding: 20px;
+    background: var(--main-color-dark);
+    color: var(--main-color-text);
+    bottom: 0;
+    width:100%
+}
+
+.ftr span {
+    color: var(--main-color-text) !important
+}
+
+.vert-align {
+    display: flex;
+    align-items: center
+}
+
+.centered{
+    margin: 0 auto
+}
+
+/*drop down link*/
+.ddl{
+    margin:0 8px 0 8px;
+    font-size:28px
+}
+
+.centered2{
+    text-align:center
+}
+
+.navbar-link:not(.is-arrowless)::after{
+    border-color:var(--main-color-bright) !important;
+}
+
+/*better contrast, otherwise you can't see anything on a bad monitor.*/
+.navbar-link,.navbar-link:focus,.navbar-bgn{
+    color: var(--main-color-text) !important
+}
+
+/*The page background is light, so the titles use the navy main color.*/
+.title{
+    color: var(--main-color-dark) !important
+}
+
+.accent{
+    color: var(--main-color-bright) !important;
+}
+
+.accent-background{
+    background-color: var(--main-color-dark) !important;
+}
+
+.error{
+    color: red !important
+}
+
+.success{
+    color: green !important
+}
+
+body,p,strong,th{
+    color: #000 !important
+}
+
+.navbar-link:hover{
+    color: var(--main-color-bright)!important;
+}
+
+.navbar-link:active{
+    color: var(--main-color-bright)!important;
+}
+
+.navbar-item:visited{
+    color: var(--main-color-text) !important;
+}
+
+/*fixes weird issue with the index button.*/
+.navbar-bgn{
+    padding:1rem 1rem
+}
+
+@media (max-width:1023px){
+    .navbar-bgn{
+        padding:1rem .75rem !important
+    }
+
+    .navbar-brand{
+        right:0;
+        position:absolute;
+        z-index:1
+    }
+
+    #navbarBasicExample{
+        width:100%;
+        position:absolute
+    }
+
+    .navbar-link:not(.is-arrowless)::after{
+        margin-right: 3.15px
+    }
+
+    .ddl{
+        display:inline-block;
+        margin-top:16px !important
+    }
+
+    .nav{
+        margin-bottom:16px !important
+    }
+
+    .navbar-menu.is-active{
+        padding:0
+    }
+
+    .navbar-index{
+        padding-bottom:0.86rem;
+        padding-top:0.86rem;
+        margin-right:52px
+    }
+}
+
+/*white background box.*/
+.wbb th,
+.wbb td {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.wbb, .ddl {
+    padding: 0px 8px 0px 8px !important;
+    background-color: #ccc !important;
+    border: 8px #ccc solid !important;
+    border-radius: 12px !important;
+    white-space: nowrap !important;
+}
+
+@media screen and (min-width: 1024px){
+    .navbar-dropdown .navbar-item{
+        white-space:unset!important;
+    }
+
+    .navbar-dropdown a.navbar-item{
+        padding-right: 16px!important
+    }
+
+    .navbar-end{
+        padding-right: 5px!important
+    }
+}
+
+.container{
+    background: var(--main-color-light);
+}
+
+.container button {
+    margin-top: 30px;
+}
+
+.field:not(:last-child) {
+    margin: 0 6rem 0.75rem 6rem;
+}
+
+/*Table styles */
+.tableStyles {
+    padding: 0;
+    background: #ccc;
+    display: inline-block;
+    border: 8px #ccc solid;
+    border-collapse: collapse;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.tableStyles tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.tableStyles th, td {
+    padding-right: 45px;
+}
+
+.tableStyles th:first-child,
+.tableStyles td:first-child {
+    padding-left: 10px;
+}
+
+.tableStyles th:last-child,
+.tableStyles td:last-child {
+    padding-right: 10px;
+}

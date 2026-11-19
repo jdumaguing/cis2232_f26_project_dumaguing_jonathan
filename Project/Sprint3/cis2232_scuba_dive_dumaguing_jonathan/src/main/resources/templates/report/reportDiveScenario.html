@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+    <title id="pageTitle">Report</title>
+</head>
+<body>
+<style scoped="scoped">input:not(.hidden) {
+    display: inline-block;
+    float: right
+}
+.cd {
+    color: #F00 !important;
+    font-weight: bold;
+    margin-bottom: -48px
+}
+label {
+    margin-right: 8px
+}</style>
+<nav th:replace="fragments/navHeader :: navbar"></nav>
+<div class="container has-text-centered">
+    <h2 class="title is-2" th:text="#{label.report.dive.scenario.report}">_</h2>
+    <form th:action="@{/report/dive/scenario/submit}" method="post" class="wbb"
+          style="display:inline-block;text-align:left!important">
+
+        <label for="scenarioSelect" th:text="#{label.report.dive.scenario.select}">Choose a dive scenario:</label>
+        <select id="scenarioSelect" th:field="${reportInput.diveScenario}">
+            <option value="">-- Select --</option>
+            <option th:each="scenario : ${scenarios}" th:value="${scenario}" th:text="${scenario}"></option>
+        </select>
+        <br/>
+        <button style="display:block;margin-top:24px!important" class="centered" th:text="#{label.submit}">Submit</button>
+    </form>
+    <br/><br/>
+    <p th:if="${not #strings.isEmpty(message)}" th:text="#{error.message.no.data.found.scenario}">not found</p>
+
+    <table class="wbb centered" th:if="${not #lists.isEmpty(reportInput.divePlans)}">
+        <thead>
+        <tr>
+            <th>Dive ID</th>
+            <th>Diver</th>
+            <th>Height (cm)</th>
+            <th>Weight (kg)</th>
+            <th>Gender</th>
+            <th>Age Group</th>
+            <th>Depth (m)</th>
+            <th>Time (min)</th>
+            <th>Tank Size (L)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${reportInput.divePlans}">
+            <td th:text="${item.diveId}">id here</td>
+            <td th:text="${item.diverName}">diver here</td>
+            <td th:text="${item.heightCm}">height here</td>
+            <td th:text="${item.weightKg}">weight here</td>
+            <td th:text="${item.gender}">gender here</td>
+            <td th:text="${item.ageGroup}">age group here</td>
+            <td th:text="${item.targetDepthMeters}">depth here</td>
+            <td th:text="${item.plannedTimeMinutes}">time here</td>
+            <td th:text="${#numbers.formatDecimal(item.recommendedTankSizeLiters, 1, 2)}">tank here</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 1. The Parent Container with Flexbox centering -->
+    <div style="width: 700px; max-width: 100%; height: 350px; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+        <!-- 2. An Inner Wrapper that sets the actual size of the chart -->
+        <div style="width: 600px; max-width: 100%; height: 280px; position: relative;">
+            <canvas id="reportChart"></canvas>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        const divePlans = [[${reportInput.divePlans}]];
+        console.log('Dive Plans:', divePlans);
+
+        //Only draw the chart when the report found some dive plans.
+        if (divePlans != null && divePlans.length > 0) {
+            const diverNames = divePlans.map(item => item.diverName);
+            const tankSizes = divePlans.map(item => item.recommendedTankSizeLiters);
+
+            const ctx = document.getElementById('reportChart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: diverNames,
+                    datasets: [
+                        {
+                            label: 'Recommended Tank Size (L)',
+                            data: tankSizes,
+                            backgroundColor: 'rgba(0, 51, 102, 0.8)',
+                            borderColor: '#003366',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Liters'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</div>
+<br/>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
